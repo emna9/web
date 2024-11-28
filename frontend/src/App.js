@@ -21,7 +21,7 @@ const App = () => {
         {/* Route for the List of Products */}
         <Route
           path="/products"
-          element={
+          element={                                                                                                                                                                     
             <ListOfProducts
               products={product} // Pass products state
               addToBag={(id) => console.log(`Added product with ID ${id} to the bag`)}
