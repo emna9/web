@@ -3,17 +3,19 @@ import { InfoCircleOutlined } from "@ant-design/icons";
 import { BsBag } from "react-icons/bs";
 import { Card, Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import { useBag } from "../../context/BagContext"; // Import the BagContext
 
 const { Meta } = Card;
 
-const CardItem = ({ perfume, addToBag, showDetails }) => {
+const CardItem = ({ perfume, showDetails }) => {
   const navigate = useNavigate();
+  const { addToBag } = useBag(); // Use addToBag directly from the context
 
   const handleShowDetails = () => {
-    navigate(`/products/${perfume.id}`);
+    navigate(`/products/${perfume._id}`);
   };
 
-  return (
+  return (  
     <Card
       hoverable
       style={{
@@ -34,18 +36,21 @@ const CardItem = ({ perfume, addToBag, showDetails }) => {
         <Button
           type="primary"
           icon={<BsBag />}
-          onClick={() => addToBag(perfume.id)}
+          style={{ backgroundColor: "#f8f7f1", color: "black" }}
+          onClick={() => addToBag(perfume._id)} // Call addToBag from the context
         >
           Add to Bag
         </Button>,
         !showDetails && (
-          <Button
-            type="default"
-            icon={<InfoCircleOutlined />}
-            onClick={handleShowDetails}
-          >
-            More Details
-          </Button>
+<Button
+  type="default"
+  icon={<InfoCircleOutlined />}
+  onClick={handleShowDetails}
+  className="custom-button"
+>
+  More Details
+</Button>
+
         ),
       ]}
     >

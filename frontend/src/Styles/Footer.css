@@ -1,0 +1,78 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #f8f7f1; /* Soft white/gray for a luxury feel */
+    color: #333; /* Elegant dark gray for a modern, readable look */
+    font-family: 'Playfair Display', serif; /* A luxury font similar to Dior's typography */
+    padding: 40px 20px;
+    border-top: 1px solid #000; /* Thin black border on top of the footer */
+    text-align: center;
+    margin-top: auto; /* Ensures the footer stays at the bottom when content is not enough */
+}
+
+/* Footer Content Styling */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.footer-company-name h3 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #000; /* Black text to give it a premium feel */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 20px; /* Spacing between the social icons */
+}
+
+.social-icon {
+    color: #000; /* Black for luxury appeal */
+    font-size: 24px;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #f8f7f1; /* A subtle hover effect to maintain class and simplicity */
+    transform: scale(1.1); /* Slight scaling for an interactive feel */
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    font-size: 14px;
+    color: #666; /* Soft gray text for a subtle, minimalist effect */
+    border-top: 1px solid #F5F5DC; /* A clean, thin border to separate sections */
+    padding-top: 20px;
+}
+
+.footer-bottom p {
+    margin-top: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-socials {
+        margin-top: 20px;
+    }
+
+    .footer-company-name h3 {
+        margin-bottom: 20px;
+    }
+}

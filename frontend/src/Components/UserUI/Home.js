@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Layout } from "antd";
 import Navbar from "./Navbar";
 import FilterAppBar from "./FilterAppBar";
 import Caroussel from "./Caroussel";
@@ -9,62 +8,66 @@ import Card from "./Card";
 import Footer from "./Footer";
 import Promotions from "./Promotions";
 import '../../App.css';
+import { ProductContext } from "../../App.js";
+import { Button } from "antd";
 
-const { Content } = Layout;
-
-const Home = ({ products }) => {
+const Home = () => {
+  const { setFilteredProducts } = useContext(ProductContext);
   const navigate = useNavigate();
-
+  
   const handleDisplayAllProducts = () => {
+    setFilteredProducts([]);
     navigate("/products"); // Navigate to the /products route
   };
 
   return (
-    <Layout>
+    <div style={{ 
+      backgroundColor: "#FFFFFF", 
+      display: "flex", 
+      flexDirection: "column", 
+      minHeight: "100vh"  // Ensure the main container takes up at least the full height of the screen
+    }}>
       <Caroussel />
-      <Navbar />
-      <FilterAppBar />
+      
+      {/* Sticky Navbar */}
+      <div className="navbar-wrapper">
+        <Navbar />
+      </div>
 
-      <Layout>
-        <Content
+      {/* Inner Content Section */}
+      <div style={{ backgroundColor: "#f8f7f1", flexGrow: 1 }}> {/* Blanc Cassé background */}
+        <div
           style={{
             padding: 24,
             margin: 0,
             minHeight: 280,
-            background: "#f0f2f5",
+            backgroundColor: "#f8f7f1", // Blanc Cassé for the content section
           }}
         >
           <Video />
           <Card />
-        </Content>
-      </Layout>
+        </div>
+      </div>
 
+      {/* Filter App Bar */}
+      <FilterAppBar />
+      
       {/* Promotions Section */}
-      <Promotions
-        products={products}
-        addToBag={(id) => console.log(`Added product with ID ${id} to the bag`)}
-        showDetails={false} // Ensure no extra details are shown
-      />
+      <Promotions /> 
+
       {/* "View All" Button */}
       <div style={{ textAlign: "center", margin: "20px" }}>
         <button
           onClick={handleDisplayAllProducts}
-          style={{
-            padding: "10px 20px",
-            backgroundColor: "#333",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-            fontSize: "1rem",
-          }}
+          className="view-all-btn" // Apply the class
         >
           View All Products
         </button>
       </div>
 
+      {/* Footer */}
       <Footer />
-    </Layout>
+    </div>
   );
 };
 

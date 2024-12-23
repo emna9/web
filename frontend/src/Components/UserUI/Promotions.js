@@ -1,13 +1,18 @@
-import React from "react";
+////Promotions.js
+import React, { useContext } from "react";
+import { Skeleton, Box, Typography } from "@mui/material";
 import CardItem from "./CardItem";
+import { ProductContext } from "../../App"; // Only fetch product-related data
+import { useBag } from "../../context/BagContext"; // Import useBag for Bag context
 
-const Promotions = ({ products, addToBag }) => {
-  // Filter products with promotion: true
-  const promotionalProducts = products.filter((product) => product.promotion);
+const Promotions = () => {
+  const { product, loading } = useContext(ProductContext); // Fetch product-related data
+  const { addToBag } = useBag(); // Fetch addToBag from BagContext
+
+  const promotionalProducts = product.filter((p) => p.promotion);
 
   return (
     <div style={{ padding: "20px" }}>
-      {/* Promotions Heading */}
       <div
         style={{
           textAlign: "center",
@@ -20,17 +25,36 @@ const Promotions = ({ products, addToBag }) => {
           Discover our exclusive deals on the finest fragrances.
         </p>
       </div>
-
-      {/* Render promotional products */}
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", justifyContent: "center" }}>
-        {promotionalProducts.map((perfume) => (
-          <CardItem
-            key={perfume.id}
-            perfume={perfume}
-            addToBag={addToBag}
-            showDetails={false} // Ensure details are not displayed
-          />
-        ))}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "20px",
+          justifyContent: "center",
+        }}
+      >
+        {loading
+          ? Array.from(new Array(4)).map((_, index) => (
+              <Box key={index} sx={{ width: 300, margin: "20px" }}>
+                <Skeleton variant="rectangular" width={300} height={200} style={{ marginBottom: "8px" }} />
+                <Skeleton width="60%" height={30} style={{ marginBottom: "8px" }} />
+                <Skeleton width="80%" height={20} />
+              </Box>
+            ))
+          : promotionalProducts.length > 0 ? (
+              promotionalProducts.map((perfume) => (
+                <CardItem
+                  key={perfume._id}
+                  perfume={perfume}
+                  addToBag={addToBag}
+                  showDetails={false}
+                />
+              ))
+            ) : (
+              <Typography variant="h6" style={{ textAlign: "center" }}>
+                No promotions available.
+              </Typography>
+            )}
       </div>
     </div>
   );

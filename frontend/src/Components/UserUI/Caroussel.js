@@ -14,6 +14,7 @@ function Caroussel() {
     autoplaySpeed: 3000,
     cssEase: "ease-in-out",
   };
+
   return (
     <div className="slider-container">
       <Slider {...settings}>

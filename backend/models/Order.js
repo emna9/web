@@ -16,7 +16,7 @@ const orderSchema = new Schema({
       },
       quantity: {
         type: Number,
-        required: true,
+        required: true,//qty per product
       },
     },
   ],
@@ -31,7 +31,7 @@ const orderSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ["pending", "confirmed", "rejected"],
+    enum: ["pending", "confirmed"],
     default: "pending",
   },
   createdAt: {

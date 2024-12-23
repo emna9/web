@@ -11,14 +11,16 @@ const userSchema = new Schema({
     required: true,
     unique: true, // Ensure the email is unique
   },
-  age: {
-    type: String,
-    required: true,
-  },
   password: {
     type: String,
     required: true, // Password is required for authentication
   },
+  role: {
+    type: String,
+    enum: ['user', 'admin'], // Allowed roles
+    default: 'user' // Default role
+    },
+    
 });
 
 const User = mongoose.model('User', userSchema);
